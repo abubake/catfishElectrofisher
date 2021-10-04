@@ -61,11 +61,11 @@ static esp_err_t i2c_master_init(void)
 void i2c_master_write_slave(uint8_t data_wr) // CHANGED FROM POINTER
 {
     i2c_port_t i2c_num = 0;
-    size_t size = 16; // previously 16
+    size_t size = 1; // previously 16
 
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
     i2c_master_start(cmd);
-    i2c_master_write_byte(cmd, (ESP_SLAVE_ADDR << 1) | I2C_MASTER_WRITE, ACK_CHECK_EN); // ack_chekc is 1
+    i2c_master_write_byte(cmd, (ESP_SLAVE_ADDR << 1) | I2C_MASTER_WRITE, ACK_CHECK_EN); // ack_check is 1
     i2c_master_write(cmd, &data_wr, size, ACK_CHECK_EN);
     i2c_master_stop(cmd);
     i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_RATE_MS);
@@ -89,10 +89,10 @@ char buffer[32];
 
 while(1){
 
-    // LCD_Reset(lcd); // clear and reset cursor
-    // sprintf(buffer,"Sensor Value: %d",data);
-    // LCD_WriteString(buffer,lcd);
-    // lcd.delay_us(1E6);
+    LCD_Reset(lcd); // clear and reset cursor
+    sprintf(buffer,"Sensor Value: %d",data);
+    LCD_WriteString(buffer,lcd);
+    lcd.delay_us(1E6);
     }
 
 }

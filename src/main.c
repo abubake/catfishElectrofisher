@@ -6,6 +6,8 @@
 #include <driver/i2c.h>
 #include "esp_log.h"
 
+/* Test comment */
+
 static const char *TAG = "i2c-simple-example";
 
 #define I2C_MASTER_PORT_NUM         0 
